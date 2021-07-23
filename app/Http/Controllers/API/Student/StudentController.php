@@ -720,7 +720,7 @@ class StudentController extends Controller
                 'pre_deduc_comm' => $request->deducted_commission_amount,
                 'user_id' => Auth::user()->id,
                 'agent_id' => Auth::user()->agent_details->id,
-                'note' => $request->notes,
+                'note' => $request->notes == '' ? null : $request->notes,
                 'verified' => 0,
             ];
             $pd->update($data);

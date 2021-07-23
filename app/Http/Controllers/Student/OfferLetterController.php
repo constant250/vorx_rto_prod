@@ -1656,8 +1656,8 @@ class OfferLetterController extends Controller
                 </table>';
             // $link = 'https://agentportal.vorx.com.au/student/'.$offerletter->student_id.'/payment-details/'.$ol_details->course_code;
 
-            $link = 'http://'.ENV('SANCTUM_STATEFUL_DOMAINS').'/student/'.$offerletter->student_id.'/payment-details/'.$offerletter->course_code;
-            $content = '<b>Dear ' . $name . ',</b><br><br>'.$student->party->name.' has been enrolled in '.$offerletterz->course_code.' course.<br><br> Payment Plan <br>'.$table.'<br><br> Please visit <a href="'.$link.'" target="_blank" data-saferedirecturl="'.$link.'">Agent Portal</a><br>Regards,<br><br><b>Admin Team</b>';
+            $link = 'https://'.ENV('SANCTUM_STATEFUL_DOMAINS').'/student/'.$offerletter->student_id.'/payment-details/'.$offerletter->course_code;
+            $content = '<b>Dear ' . $name . ',</b><br><br>'.$student->party->name.' has been enrolled in '.$offerletter->course_code.' course.<br><br> Payment Plan <br>'.$table.'<br><br> Please visit <a href="'.$link.'" target="_blank" data-saferedirecturl="'.$link.'">Agent Portal</a><br>Regards,<br><br><b>Admin Team</b>';
 
             $s = $send->send_automate('Newly Enrolled Student', $content, [$org->training_organisation_name => $org->email_address], $emailsTo,[],[]);
 
