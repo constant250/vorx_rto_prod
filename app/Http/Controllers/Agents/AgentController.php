@@ -810,7 +810,8 @@ class AgentController extends Controller
                     $sb->unverified_collection -= $exceed;
                     
                     $sb->adjusted = true;
-                    if(isset($sb->comm_balance) && $sb->balance == 0){ //kung naa pa syay commission balance
+                    // if(isset($sb->comm_balance) && $sb->balance == 0){ //kung naa pa syay commission balance
+                    if($sb->balance == 0){ //kung naa pa syay commission balance
                         $sb->deducted_approved = $sb->approved_amount_paid - $exceed;
                         $sb->deducted_amount = $exceed;
                     }else{ //if fully paid na ang allocated amount 
