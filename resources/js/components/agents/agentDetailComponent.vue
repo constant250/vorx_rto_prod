@@ -19,6 +19,7 @@
         <a v-bind:class="'nav-item nav-link-'+app_color" id="nav-attachments-tab" data-toggle="tab" href="#nav-attachments" role="tab" aria-controls="nav-attachments" aria-selected="false" >Attachments</a>
         <a v-bind:class="'nav-item nav-link-'+app_color" id="nav-commission-settings-tab" data-toggle="tab" href="#nav-commission-settings" role="tab" aria-controls="nav-prospectus" aria-selected="false">Commission Settings</a>
         <a v-bind:class="'nav-item nav-link-'+app_color+''" id="nav-collections-tab" data-toggle="tab" href="#nav-collections" role="tab" aria-controls="nav-collections" aria-selected="false">Collections</a>
+        <a v-bind:class="'nav-item nav-link-'+app_color" id="nav-pending-commission-tab" data-toggle="tab" href="#nav-pending-commission" role="tab" aria-controls="nav-pending-commission" aria-selected="false">Pending Commission</a>
         <!-- <a v-bind:class="'nav-item nav-link-'+app_color" id="nav-commission-report-tab" data-toggle="tab" href="#nav-commission-report" role="tab" aria-controls="nav-commission-report" aria-selected="false">Commission Report</a> -->
         <!-- <a v-bind:class="'nav-item nav-link-'+app_color" id="nav-release-commission-tab" data-toggle="tab" href="#nav-release-commission" role="tab" aria-controls="nav-release-commission" aria-selected="false">Release Commission</a> -->
       </div>
@@ -35,6 +36,9 @@
       </div>
       <div class="tab-pane fade" id="nav-collections" role="tabpanel" aria-labelledby="nav-collections-tab">
         <agent-collections />
+      </div>
+      <div class="tab-pane fade" id="nav-pending-commission" role="tabanel" aria-labelledby="nav-pending-commission-tab">
+        <pending-commission />
       </div>
       <!-- <div class="tab-pane fade" id="nav-commission-report" role="tabpanel" aria-labelledby="nav-commission-report-tab">
         <agent-commission-report></agent-commission-report>
@@ -55,6 +59,7 @@ import AgentCommission from "./agentCommissionComponent.vue";
 import AgentCommissionReport from "./agentCommissionReportComponent.vue";
 import AgentReleaseCommission from "./agentReleaseCommissionComponent.vue";
 import AgentCollections from "./agentCollectionsComponent.vue"
+import PendingCommission from './pendingCommissionComponent.vue';
 
 export default {
   // mounted() {
@@ -67,7 +72,8 @@ export default {
       AgentCommission,
       AgentCommissionReport,
       AgentReleaseCommission,
-      AgentCollections
+      AgentCollections,
+      PendingCommission
   },
   data() {
     return {

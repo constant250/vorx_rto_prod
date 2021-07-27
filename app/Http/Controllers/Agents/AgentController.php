@@ -1129,6 +1129,7 @@ class AgentController extends Controller
                 
                 foreach($payment_schedule as $key=>$ps){
                     if(isset($ps['deducted_amount'])){
+                        dd('1');
                         // dump('nay negatives owh');
                         $deducted_amount = $ps['deducted_amount'];
                         $excess += $deducted_amount;
@@ -1166,6 +1167,7 @@ class AgentController extends Controller
                         $new_payment->save();
 
                     }else if($ps['allocated_amount'] < 0){
+                        dd('2');
                         $deducted_amount = abs($ps['allocated_amount']);
                         $excess += $deducted_amount;
 
@@ -1201,43 +1203,61 @@ class AgentController extends Controller
                         $new_payment->save();
 
                     }else{
-                        if($collection_received > 0 || $ps['allocated_comm'] > 0 ){
-                            if($collection_received > $ps['balance']){
-                                $new_payment = new FundedStudentPaymentDetails;
-                                $new_payment->student_id = $student_payment['student_id'];
-                                $new_payment->agent_id = $student_payment['agent_id'];
-                                $new_payment->student_course_id = $student_payment['student_course_id'];
-                                $new_payment->offer_letter_course_detail_id = $ps['offer_letter_course_detail_id'];
-                                $new_payment->transaction_code = $student_payment['transaction_code'];
-                                $new_payment->payment_schedule_template_id = $ps['id'];
-                                $new_payment->payment_date = $student_payment['payment_date'];
-                                $new_payment->amount = $ps['balance'];
-                                $new_payment->verified = 1;
-                                $new_payment->collection_id = $collection_id;
-                                $new_payment->user_id = $user_id;
-                                $new_payment->pre_deduc_comm = $ps['allocated_comm'];
-                                $new_payment->save();
+                        $new_payment = new FundedStudentPaymentDetails;
+                        $new_payment->student_id = $student_payment['student_id'];
+                        $new_payment->agent_id = $student_payment['agent_id'];
+                        $new_payment->student_course_id = $student_payment['student_course_id'];
+                        $new_payment->offer_letter_course_detail_id = $ps['offer_letter_course_detail_id'];
+                        $new_payment->transaction_code = $student_payment['transaction_code'];
+                        $new_payment->payment_schedule_template_id = $ps['id'];
+                        $new_payment->payment_date = $student_payment['payment_date'];
+                        $new_payment->amount = $ps['unverified_collection'];
+                        $new_payment->verified = 1;
+                        $new_payment->collection_id = $collection_id;
+                        $new_payment->user_id = $user_id;
+                        $new_payment->pre_deduc_comm = $ps['allocated_comm'];
+                        $new_payment->save();
+                        // dump($new_payment);
+
+                        // if($collection_received > 0 || $ps['allocated_comm'] > 0 ){
+                        //     if($collection_received > $ps['balance']){
+                        //         // $amount_to_be_paid = $collection_
+                        //         $new_payment = new FundedStudentPaymentDetails;
+                        //         $new_payment->student_id = $student_payment['student_id'];
+                        //         $new_payment->agent_id = $student_payment['agent_id'];
+                        //         $new_payment->student_course_id = $student_payment['student_course_id'];
+                        //         $new_payment->offer_letter_course_detail_id = $ps['offer_letter_course_detail_id'];
+                        //         $new_payment->transaction_code = $student_payment['transaction_code'];
+                        //         $new_payment->payment_schedule_template_id = $ps['id'];
+                        //         $new_payment->payment_date = $student_payment['payment_date'];
+                        //         $new_payment->amount = $ps['balance'];
+                        //         $new_payment->verified = 1;
+                        //         $new_payment->collection_id = $collection_id;
+                        //         $new_payment->user_id = $user_id;
+                        //         $new_payment->pre_deduc_comm = $ps['allocated_comm'];
+                        //         $new_payment->save();
                                 
-                                $collection_received -= $ps['balance'];
-                            }else{
-                                $new_payment = new FundedStudentPaymentDetails;
-                                $new_payment->student_id = $student_payment['student_id'];
-                                $new_payment->agent_id = $student_payment['agent_id'];
-                                $new_payment->student_course_id = $student_payment['student_course_id'];
-                                $new_payment->offer_letter_course_detail_id = $ps['offer_letter_course_detail_id'];
-                                $new_payment->transaction_code = $student_payment['transaction_code'];
-                                $new_payment->payment_schedule_template_id = $ps['id'];
-                                $new_payment->payment_date = $student_payment['payment_date'];
-                                $new_payment->amount = $collection_received;
-                                $new_payment->verified = 1;
-                                $new_payment->collection_id = $collection_id;
-                                $new_payment->user_id = $user_id;
-                                $new_payment->pre_deduc_comm = $ps['allocated_comm'];
-                                $new_payment->save();
+                        //         $collection_received -= $ps['balance'];
+                        //     }else{
+                        //         $new_payment = new FundedStudentPaymentDetails;
+                        //         $new_payment->student_id = $student_payment['student_id'];
+                        //         $new_payment->agent_id = $student_payment['agent_id'];
+                        //         $new_payment->student_course_id = $student_payment['student_course_id'];
+                        //         $new_payment->offer_letter_course_detail_id = $ps['offer_letter_course_detail_id'];
+                        //         $new_payment->transaction_code = $student_payment['transaction_code'];
+                        //         $new_payment->payment_schedule_template_id = $ps['id'];
+                        //         $new_payment->payment_date = $student_payment['payment_date'];
+                        //         $new_payment->amount = $collection_received;
+                        //         $new_payment->verified = 1;
+                        //         $new_payment->collection_id = $collection_id;
+                        //         $new_payment->user_id = $user_id;
+                        //         $new_payment->pre_deduc_comm = $ps['allocated_comm'];
+                        //         $new_payment->save();
                                 
-                                $collection_received -= $collection_received;
-                            }
-                        }
+                        //         $collection_received -= $collection_received;
+                        //     }
+                        //     dump($new_payment);
+                        // }
                     }
                 }
                 // dd($collections_with_excess);
