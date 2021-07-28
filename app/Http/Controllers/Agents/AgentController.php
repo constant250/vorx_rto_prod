@@ -1203,6 +1203,7 @@ class AgentController extends Controller
                         $new_payment->save();
 
                     }else{
+                        $collection_row = isset($ps['unverified_collection']) ? $ps['unverified_collection'] : 0;
                         $new_payment = new FundedStudentPaymentDetails;
                         $new_payment->student_id = $student_payment['student_id'];
                         $new_payment->agent_id = $student_payment['agent_id'];
@@ -1211,7 +1212,7 @@ class AgentController extends Controller
                         $new_payment->transaction_code = $student_payment['transaction_code'];
                         $new_payment->payment_schedule_template_id = $ps['id'];
                         $new_payment->payment_date = $student_payment['payment_date'];
-                        $new_payment->amount = $ps['unverified_collection'];
+                        $new_payment->amount = $collection_row;
                         $new_payment->verified = 1;
                         $new_payment->collection_id = $collection_id;
                         $new_payment->user_id = $user_id;
