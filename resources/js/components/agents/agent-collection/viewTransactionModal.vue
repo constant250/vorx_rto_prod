@@ -143,11 +143,10 @@
                                 </td> -->
                                  <td class="text-center">{{ps.comm_balance.toFixed(2)}}</td>
                                  <td class="text-center bg-secondary text-white" v-if="toType(findPreDeduct(ps.id))!=='undefined'">
-                                     <!-- {{findPreDeduct(ps.id)}} -->
-                                     {{ps.prededucted_com}}
+                                     {{findPreDeduct(ps.id)}}
                                  </td>
                                  <td v-else class="text-center">
-                                     {{ps.prededucted_com}}
+                                     0.00
                                  </td>
                              </tr>
                         </tbody>
